@@ -3146,8 +3146,8 @@ small {
   max-width: 620px;
   margin: 22px auto 0;
   color: #e8b9a9;
-  font: 500 16px/1.66 "Golos Text", "Onest", sans-serif;
-  letter-spacing: -.012em;
+  font: 400 15px/1.8 "PT Mono", monospace;
+  letter-spacing: 0;
   text-align: center;
   text-shadow: none;
   text-wrap: pretty;
