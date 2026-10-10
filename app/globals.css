@@ -2949,6 +2949,53 @@ small {
 @keyframes title-arrive { from { opacity:0; transform:translateY(18px); } }
 @keyframes line-reveal { from { transform:scaleX(0); } to { transform:scaleX(1); } }
 
+/* Restore the original film palette inside tactile, compact frames. */
+.movie-page .film-module {
+  --module-accent:#ff5b3d;
+  background:#171a21;
+  border:2px solid #edeae2;
+  border-radius:6px;
+  box-shadow:4px 4px 0 #ff5b3d;
+  cursor:pointer;
+  transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;
+}
+.movie-page .film-module:hover { transform:translate(-1px,-1px); box-shadow:5px 5px 0 #ff5b3d; }
+.movie-page .film-module:active { transform:translate(4px,4px); box-shadow:0 0 0 #ff5b3d; }
+.movie-page .film-module-grid { gap:16px; padding-bottom:4px; }
+.movie-page .film-module .module-index { color:#ff5b3d; }
+.movie-page .module-total { color:#edeae2; }
+.module-ratio { display:block; color:#f0d355; font:500 11px/1.35 "Onest",sans-serif; margin-top:9px; }
+.module-finance-bars { display:grid; gap:5px; margin-top:auto; padding-top:12px; }
+.module-finance-bars > div { display:flex; justify-content:space-between; gap:5px; color:#9a9da6; font:400 11px/1.2 "Onest",sans-serif; }
+.module-finance-bars i { height:3px; display:block; background:#ffffff16; overflow:hidden; }
+.module-finance-bars b { height:100%; display:block; background:#ff5b3d; }
+.module-finance-bars b.module-budget-bar { background:#f0d355; }
+.movie-page .module-dates span { color:#9a9da6; }
+.movie-page .module-dates div { padding-bottom:8px; border-bottom:1px solid #2a2e38; }
+.movie-page .module-play { color:#0d0f14; }
+.movie-page .module-play svg { background:#ff5b3d; border:2px solid #0d0f14; box-shadow:3px 3px 0 #edeae2; border-radius:5px; }
+.movie-page .module-preview img { opacity:1; }
+.movie-page .module-stills { display:grid; grid-template-columns:1.7fr 1fr; gap:5px; margin:0; overflow:hidden; border-radius:3px; }
+.movie-page .module-stills img,
+.movie-page .module-stills img:nth-child(2) { position:static; width:100%; height:100%; min-height:0; object-fit:cover; border:0; border-radius:2px; transform:none; opacity:1; }
+@media(max-width:600px) {
+  .movie-page .film-module-grid { gap:14px; }
+  .movie-page .film-module { aspect-ratio:auto; height:214px; }
+  .movie-page .module-total { font-size:30px; }
+  .module-ratio { font-size:10px; margin-top:7px; }
+  .module-finance-bars { gap:4px; padding-top:8px; }
+  .module-finance-bars > div { font-size:9px; }
+  .movie-page .module-finance h2 { margin-bottom:8px; font-size:19px; }
+  .movie-page .module-dates { gap:10px; }
+  .movie-page .module-dates div { padding-bottom:6px; }
+}
+@media(max-width:360px) {
+  .movie-page .film-module { height:224px; min-height:0; }
+  .movie-page .module-finance h2 { font-size:18px; }
+  .movie-page .module-total { font-size:26px; }
+  .movie-page .module-preview,.movie-page .module-stills { min-height:0; }
+}
+
 /* Cinema-service direction — a single confident mobile composition. */
 .movie-page {
   --bg: #0d0f14;

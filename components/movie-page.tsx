@@ -269,12 +269,13 @@ export function MoviePage({ movie: m }: { movie: MovieDetail }) {
               <span className="module-index">02 / BOX OFFICE</span>
               <h2>Мировые сборы</h2>
               <strong className="module-total">{compactMoney(m.finance.worldwide.value)}</strong>
-              <div className="module-mini-chart" aria-label="Сравнение сборов и бюджета">
-                <span style={{height:"100%"}} />
-                <span style={{height:`${m.finance.budget.value && m.finance.worldwide.value ? Math.max(10,Math.min(100,m.finance.budget.value / m.finance.worldwide.value * 100)) : 10}%`}} />
-                <TrendingUp size={30} strokeWidth={1.4}/>
+              <span className="module-ratio">{m.finance.budget.value && m.finance.worldwide.value ? `↗ В ${(m.finance.worldwide.value / m.finance.budget.value).toFixed(1)} раза больше бюджета` : "Бюджет не указан"}</span>
+              <div className="module-finance-bars" aria-label="Сравнение сборов и бюджета">
+                <div><span>Сборы</span><span>{compactMoney(m.finance.worldwide.value)}</span></div>
+                <i><b style={{width:"100%"}}/></i>
+                <div><span>Бюджет</span><span>{compactMoney(m.finance.budget.value)}</span></div>
+                <i><b className="module-budget-bar" style={{width:`${m.finance.budget.value && m.finance.worldwide.value ? Math.min(100,m.finance.budget.value / m.finance.worldwide.value * 100) : 0}%`}}/></i>
               </div>
-              <span className="module-foot">{m.finance.budget.value && m.finance.worldwide.value ? `↗ ${(m.finance.worldwide.value / m.finance.budget.value).toFixed(1)}× бюджета` : "Бюджет не указан"}</span>
             </section>
             <section id="videos" className="film-module module-videos">
               <span className="module-index">03 / TRAILERS</span>
@@ -289,7 +290,7 @@ export function MoviePage({ movie: m }: { movie: MovieDetail }) {
               <span className="module-index">04 / GALLERY</span>
               <h2>Галерея</h2>
               <div className="module-stills">
-                {m.gallery.slice(0,2).map((item,i) => <img key={item.src} src={item.src} alt={item.title} loading="lazy" style={{zIndex:2-i}}/>)}
+                {m.gallery.slice(0,2).map((item) => <img key={item.src} src={item.src} alt={item.title} loading="lazy"/>)}
                 {!m.gallery.length && <ImageIcon size={34}/>}
               </div>
               <span className="module-foot">{m.gallery.length ? `${m.gallery.length} изображений · кадры и постеры` : "Изображений пока нет"}</span>
