@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Brygada+1918:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Onest:wght@400;450;500;550;600;650;700&family=Oswald:wght@500;600;700&family=PT+Mono&family=Unbounded:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;450;500&family=Onest:wght@400;450;500;550;600;650;700&family=Oswald:wght@500;600;700&family=PT+Mono&family=Unbounded:wght@400;500;600&display=swap");
 @import "tailwindcss";
 :root {
   --bg: #0d0f11;
@@ -3145,9 +3145,9 @@ small {
 .movie-page .synopsis {
   max-width: 650px;
   margin: 22px auto 0;
-  color: #d2cec5;
-  font: 400 17px/1.58 "Brygada 1918", Georgia, serif;
-  letter-spacing: .005em;
+  color: #cfd2d8;
+  font: 450 15.5px/1.68 "Manrope", "Onest", sans-serif;
+  letter-spacing: -.008em;
   text-align: center;
   text-wrap: pretty;
 }
