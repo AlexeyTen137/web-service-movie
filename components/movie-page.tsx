@@ -255,155 +255,46 @@ export function MoviePage({ movie: m }: { movie: MovieDetail }) {
           </div>
         </div>
         <div className="container movie-content">
-          <motion.section initial={false} whileInView={reduceMotion ? {} : { y: 0 }} style={{ y: reduceMotion ? 0 : 16 }} viewport={{once:true,amount:0.12}} transition={{duration:0.45}} id="releases" className="content-section">
-            <SectionTitle
-              title="Премьеры"
-            />
-            <div className="premiere-cards">
-              {[
-                {label: "Впервые в мире", release: earliest, icon: "WORLD"},
-                {label: "В России", release: m.releases.find(r => r.code === "RU"), icon: "RU"},
-              ].map(({label,release,icon}) => <div className="premiere-card" key={label}><span className="premiere-icon" aria-hidden="true">{icon}</span><div><span>{label}</span><strong>{release?.date ? formatDate(release.date) : "Дата не объявлена"}</strong></div></div>)}
-            </div>
-            <details className="feed-details"><summary>Все даты премьер <ChevronDown size={18}/></summary>
-            <div className="release-filters">
-              <label className="country-search">
-                Страна
-                <input
-                  placeholder="Найти страну…"
-                  value={country}
-                  onChange={(e) => setCountry(e.target.value)}
-                />
-              </label>
-              <label>
-                Регион
-                <select
-                  value={region}
-                  onChange={(e) => setRegion(e.target.value)}
-                >
-                  {["Все регионы", "Европа", "Америка", "Азия", "Океания"].map(
-                    (v) => (
-                      <option key={v}>{v}</option>
-                    ),
-                  )}
-                </select>
-              </label>
-              <label>
-                Тип релиза
-                <select value={type} onChange={(e) => setType(e.target.value)}>
-                  {["Все релизы", ...new Set(m.releases.map(r => r.type))].map(
-                    (v) => (
-                      <option key={v}>{v}</option>
-                    ),
-                  )}
-                </select>
-              </label>
-              <button
-                className="sort-button"
-                onClick={() => setAscending(!ascending)}
-              >
-                <ArrowDownUp size={15} />
-                По дате {ascending ? "↑" : "↓"}
-              </button>
-            </div>
-            <div className="release-list">
-              {shown.map((r,i) => <div className="release-item" key={`${r.code}-${r.type}-${i}`}><span className="flag">{flag(r.code)}</span><div><strong>{r.country}</strong><small>{r.type}</small></div><time>{r.date ? formatDate(r.date) : "Дата не объявлена"}</time></div>)}
-              {!rows.length && <p className="empty-inline">Нет релизов с такими фильтрами.</p>}
-            </div>
-            {rows.length > defaultCount && (
-              <button
-                className="text-button all-countries"
-                onClick={() => setAll(!all)}
-              >
-                {all ? "Свернуть" : "Все страны и релизы"}{" "}
-                <span>{rows.length}</span>
-                <ChevronDown size={15} className={all ? "rotate" : ""} />
-              </button>
-            )}
-            <p className="data-notice">{publicSample ? "Даты первого проката. Источники:" : "Даты — демонстрационный пример."}</p>
-            {publicSample && <div className="source-links">{[...new Map(m.releases.map(r => [r.source.url,r.source])).values()].map(source => <SourceLink key={source.url} source={source}/>)}</div>}
-            </details>
-          </motion.section>
-          <motion.section initial={false} whileInView={reduceMotion ? {} : { y: 0 }} style={{ y: reduceMotion ? 0 : 16 }} viewport={{once:true,amount:0.12}} transition={{duration:0.45}} id="box-office" className="content-section">
-            <h2 className="sr-only">Кассовые сборы</h2>
-            <div className="box-office-card">
-              <div className="finance-caption"><span className="stat-label">Мировые сборы</span><TrendingUp size={24} strokeWidth={1.3}/></div>
-              <strong className="big-total">{money(m.finance.worldwide.value)}</strong>
-              {m.finance.budget.value && m.finance.worldwide.value ? <>
-                <span className="ratio-bubble"><TrendingUp size={16}/>В {(m.finance.worldwide.value / m.finance.budget.value).toFixed(1)} раза больше бюджета</span>
-                <div className="ratio-chart">
-                  <div><span>Сборы по всему миру</span><strong>{money(m.finance.worldwide.value)}</strong></div>
-                  <div className="chart-track"><motion.div className="bar worldwide-bar" initial={{scaleX:reduceMotion ? 1 : 0}} whileInView={{scaleX:1}} viewport={{once:true,amount:0.8}} transition={{duration:0.8}}/></div>
-                  <div><span>Бюджет фильма</span><strong>{money(m.finance.budget.value)}</strong></div>
-                  <div className="chart-track"><motion.div className="bar budget-bar" style={{width:`${Math.min(100,m.finance.budget.value / m.finance.worldwide.value * 100)}%`}} initial={{scaleX:reduceMotion ? 1 : 0}} whileInView={{scaleX:1}} viewport={{once:true,amount:0.8}} transition={{duration:0.8,delay:0.12}}/></div>
-                </div>
-                <p className="chart-note">Сборы — это выручка кинотеатров, а не прибыль фильма.</p>
-              </> : <p className="chart-note">Данных для сравнения пока недостаточно.</p>}
-            </div>
-            <details className="feed-details"><summary>Подробнее о сборах <ChevronDown size={18}/></summary>
-              <dl className="money-details">{Object.entries(m.finance).map(([key,data],i) => <div key={key}><dt>{["Бюджет","Первый уикенд · США и Канада","США и Канада","Весь мир"][i]}</dt><dd>{money(data.value)}</dd></div>)}</dl>
-              <p className="data-notice">{publicSample ? "Все релизы, включая повторный прокат." : "Демонстрационные значения."} <SourceLink source={m.finance.worldwide.source}/> · {formatDate(m.finance.worldwide.source.asOf)}</p>
-            </details>
-          </motion.section>
-          <motion.section initial={false} whileInView={reduceMotion ? {} : { y: 0 }} style={{ y: reduceMotion ? 0 : 16 }} viewport={{once:true,amount:0.12}} transition={{duration:0.45}} id="videos" className="content-section">
-            <SectionTitle
-              title="Трейлеры"
-            />
-            <div className="video-grid">
-              {m.videos.slice(0,1).map(renderVideo)}
-            </div>
-            {m.videos.length > 1 && <details className="feed-details"><summary>Ещё видео <ChevronDown size={18}/></summary><div className="video-grid">{m.videos.slice(1).map((v,i) => renderVideo(v,i+1))}</div></details>}
-            {!m.videos.length && (
-              <Empty
-                text="Трейлеры пока не добавлены"
-                detail="Когда будет подключён источник, здесь появятся официальные ролики."
-              />
-            )}
-          </motion.section>
-          <motion.section initial={false} whileInView={reduceMotion ? {} : { y: 0 }} style={{ y: reduceMotion ? 0 : 16 }} viewport={{once:true,amount:0.12}} transition={{duration:0.45}} id="gallery" className="content-section">
-            <SectionTitle
-              title="Галерея"
-            />
-            <div
-              className="gallery-tabs"
-              role="group"
-              aria-label="Тип изображений"
-            >
-              {["Все", "Кадры", "Постеры"].map((t) => (
-                <button
-                  key={t}
-                  aria-pressed={galleryType === t}
-                  className={galleryType === t ? "active" : ""}
-                  onClick={() => setGalleryType(t)}
-                >
-                  {t}
-                </button>
-              ))}
-            </div>
-            <div className="gallery-grid">
-              {gallery.map((i) => (
-                <button
-                  className={`gallery-item ${i.kind.includes("постер") ? "gallery-poster" : ""}`}
-                  key={i.src}
-                  onClick={() =>
-                    setImage(m.gallery.findIndex((a) => a.src === i.src))
-                  }
-                >
-                  <img src={i.src} alt={i.title} loading="lazy" />
-                  <span>
-                    {i.kind}
-                    <ArrowUpRight size={16} />
-                  </span>
-                </button>
-              ))}
-            </div>
-            {!gallery.length && (
-              <Empty
-                text="Изображений пока нет"
-                detail="Официальные материалы появятся после подключения источника."
-              />
-            )}
-          </motion.section>
+          <div className="film-module-grid">
+            <section id="releases" className="film-module module-releases">
+              <span className="module-index">01 / PREMIERES</span>
+              <h2>Премьеры</h2>
+              <div className="module-dates">
+                <div><span>WORLD</span><strong>{earliest?.date ? formatDate(earliest.date).replace(" г.", "") : "Ожидается"}</strong></div>
+                <div><span>РОССИЯ</span><strong>{m.releases.find(r => r.code === "RU")?.date ? formatDate(m.releases.find(r => r.code === "RU")!.date!).replace(" г.", "") : "Ожидается"}</strong></div>
+              </div>
+              <span className="module-foot">Первый выход на экран</span>
+            </section>
+            <section id="box-office" className="film-module module-finance">
+              <span className="module-index">02 / BOX OFFICE</span>
+              <h2>Мировые сборы</h2>
+              <strong className="module-total">{compactMoney(m.finance.worldwide.value)}</strong>
+              <div className="module-mini-chart" aria-label="Сравнение сборов и бюджета">
+                <span style={{height:"100%"}} />
+                <span style={{height:`${m.finance.budget.value && m.finance.worldwide.value ? Math.max(10,Math.min(100,m.finance.budget.value / m.finance.worldwide.value * 100)) : 10}%`}} />
+                <TrendingUp size={30} strokeWidth={1.4}/>
+              </div>
+              <span className="module-foot">{m.finance.budget.value && m.finance.worldwide.value ? `↗ ${(m.finance.worldwide.value / m.finance.budget.value).toFixed(1)}× бюджета` : "Бюджет не указан"}</span>
+            </section>
+            <section id="videos" className="film-module module-videos">
+              <span className="module-index">03 / TRAILERS</span>
+              <h2>Трейлеры</h2>
+              <div className="module-preview">
+                {m.backdrop && <img src={m.backdrop} alt="" loading="lazy"/>}
+                <span className="module-play"><Play size={18} fill="currentColor"/></span>
+              </div>
+              <span className="module-foot">{m.videos.length ? `${m.videos.length} видео · официальный трейлер` : "Видео пока нет"}</span>
+            </section>
+            <section id="gallery" className="film-module module-gallery">
+              <span className="module-index">04 / GALLERY</span>
+              <h2>Галерея</h2>
+              <div className="module-stills">
+                {m.gallery.slice(0,2).map((item,i) => <img key={item.src} src={item.src} alt={item.title} loading="lazy" style={{zIndex:2-i}}/>)}
+                {!m.gallery.length && <ImageIcon size={34}/>}
+              </div>
+              <span className="module-foot">{m.gallery.length ? `${m.gallery.length} изображений · кадры и постеры` : "Изображений пока нет"}</span>
+            </section>
+          </div>
           <motion.section initial={false} whileInView={reduceMotion ? {} : { y: 0 }} style={{ y: reduceMotion ? 0 : 16 }} viewport={{once:true,amount:0.12}} transition={{duration:0.45}} id="production" className="content-section">
             <div className="credits-heading">
               <span>05 / CREDITS</span>

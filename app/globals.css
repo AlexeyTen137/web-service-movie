@@ -2869,6 +2869,82 @@ small {
   }
 }
 @keyframes film-run { to { background-position: 18px 0; } }
+/* Compact film modules share one frame and one numbering system. */
+.movie-page .film-module-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  padding-top:24px;
+}
+.movie-page .film-module {
+  --module-accent:#f0d355;
+  position:relative;
+  min-width:0;
+  aspect-ratio:1;
+  display:flex;
+  flex-direction:column;
+  padding:32px 18px 15px;
+  border:1px solid color-mix(in srgb,var(--module-accent) 32%,#2a2e38);
+  border-radius:7px;
+  background:linear-gradient(145deg,color-mix(in srgb,var(--module-accent) 7%,#171a21),#171a21 70%);
+  box-shadow:3px 3px 0 color-mix(in srgb,var(--module-accent) 23%,transparent);
+  overflow:hidden;
+}
+.movie-page .module-finance { --module-accent:#ff7657; }
+.movie-page .module-videos { --module-accent:#f3b69e; }
+.movie-page .module-gallery { --module-accent:#a8c7ce; }
+.module-index {
+  position:absolute;
+  top:12px;
+  right:12px;
+  color:var(--module-accent);
+  font:400 9px/1 "PT Mono",monospace;
+  white-space:nowrap;
+}
+.movie-page .film-module h2 {
+  margin:5px 0 14px;
+  color:#edeae2;
+  font:600 clamp(20px,4.6vw,30px)/1.1 "Oswald",sans-serif;
+  text-transform:uppercase;
+  letter-spacing:-.02em;
+}
+.module-dates { display:grid; gap:15px; }
+.module-dates div { display:flex; flex-direction:column; gap:4px; }
+.module-dates span { font:400 10px/1 "PT Mono",monospace; color:var(--module-accent); }
+.module-dates strong { font:600 clamp(13px,3.4vw,20px)/1.2 "Onest",sans-serif; white-space:nowrap; }
+.module-foot { margin-top:auto; padding-top:10px; color:#a6a9b1; font:400 11px/1.3 "Onest",sans-serif; }
+.module-total { color:var(--module-accent); font:600 clamp(26px,6.5vw,43px)/1 "Oswald",sans-serif; white-space:nowrap; }
+.module-mini-chart { flex:1; min-height:25px; max-height:70px; display:flex; align-items:flex-end; gap:8px; margin-top:15px; }
+.module-mini-chart > span { width:26px; border-radius:2px 2px 0 0; background:var(--module-accent); }
+.module-mini-chart > span:nth-child(2) { background:#858a96; }
+.module-mini-chart svg { margin-left:auto; align-self:center; color:var(--module-accent); }
+.module-preview { position:relative; flex:1; min-height:0; overflow:hidden; border-radius:3px; background:#252934; }
+.module-preview img { width:100%; height:100%; position:absolute; object-fit:cover; opacity:.7; }
+.module-play { position:absolute; inset:0; display:grid; place-content:center; color:var(--module-accent); }
+.module-play svg { box-sizing:content-box; padding:10px; background:#0d0f14c9; border:1px solid var(--module-accent); border-radius:4px; }
+.module-stills { position:relative; flex:1; min-height:0; margin:0 6px; }
+.module-stills img { position:absolute; width:78%; height:86%; object-fit:cover; border:2px solid #a8c7ce; border-radius:3px; top:3px; left:0; transform:rotate(-5deg); }
+.module-stills img:nth-child(2) { left:22%; top:9px; transform:rotate(6deg); opacity:.7; }
+@media(max-width:600px) {
+  .movie-page .film-module-grid { gap:10px; }
+  .movie-page .film-module { padding:29px 12px 12px; }
+  .movie-page .film-module h2 { margin:5px 0 10px; font-size:21px; }
+  .module-index { top:10px; right:9px; font-size:8px; }
+  .module-dates { gap:11px; }
+  .module-dates strong { font-size:13px; }
+  .module-foot { font-size:10px; padding-top:8px; }
+  .module-mini-chart { margin-top:6px; min-height:18px; max-height:28px; }
+  .movie-page .module-finance h2 { font-size:18px; margin-bottom:7px; }
+  .module-finance .module-foot { flex-shrink:0; font-size:10px; padding-top:5px; }
+}
+@media(max-width:360px) {
+  .movie-page .movie-content { padding-inline:14px; }
+  .movie-page .film-module { aspect-ratio:auto; min-height:180px; padding-inline:10px; }
+  .movie-page .film-module h2 { font-size:19px; }
+  .module-dates strong { font-size:12px; }
+  .module-total { font-size:27px; }
+  .module-preview,.module-stills { min-height:65px; }
+}
 @keyframes poster-arrive { from { opacity:0; transform:translate(-12px,18px) rotate(-2deg); } }
 @keyframes title-arrive { from { opacity:0; transform:translateY(18px); } }
 @keyframes line-reveal { from { transform:scaleX(0); } to { transform:scaleX(1); } }
