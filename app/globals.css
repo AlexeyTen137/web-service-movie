@@ -3145,11 +3145,11 @@ small {
 .movie-page .synopsis {
   max-width: 620px;
   margin: 22px auto 0;
-  color: #c8caff;
+  color: #e8b9a9;
   font: 500 16px/1.66 "Golos Text", "Onest", sans-serif;
   letter-spacing: -.012em;
   text-align: center;
-  text-shadow: 0 0 24px rgba(143,130,255,.12);
+  text-shadow: none;
   text-wrap: pretty;
 }
 .film-tabs {
