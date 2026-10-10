@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Onest:wght@400;450;500;550;600;650;700&family=Oswald:wght@500;600;700&family=Unbounded:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Brygada+1918:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Onest:wght@400;450;500;550;600;650;700&family=Oswald:wght@500;600;700&family=PT+Mono&family=Unbounded:wght@400;500;600&display=swap");
 @import "tailwindcss";
 :root {
   --bg: #0d0f11;
@@ -2923,8 +2923,12 @@ small {
 .movie-page .header-search .search-field > svg { color: #0d0f14; width: 21px; height: 21px; }
 .movie-page .header-search input {
   color: #0d0f14;
-  font: 600 15px/1.2 "Onest", sans-serif;
-  letter-spacing: 0;
+  font: 400 15px/1.2 "PT Mono", monospace;
+  letter-spacing: .045em;
+}
+.movie-page .header-search input::placeholder {
+  color: #0d0f14;
+  opacity: 1;
 }
 .movie-page .header-search .search-submit {
   width: 38px;
@@ -2971,13 +2975,7 @@ small {
   pointer-events: none;
 }
 .movie-page .film-cover::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: linear-gradient(90deg, transparent 0 96%, var(--accent) 96% 100%);
-  opacity: .9;
-  pointer-events: none;
+  display: none;
 }
 .movie-page .movie-backdrop {
   position: absolute;
@@ -2995,7 +2993,7 @@ small {
   z-index: 4;
   top: 18px;
   left: 18px;
-  right: 30px;
+  right: 18px;
   display: grid;
   grid-template-columns: 46px 1fr 46px;
   align-items: center;
@@ -3025,7 +3023,7 @@ small {
   position: absolute;
   z-index: 4;
   top: 39%;
-  right: 34px;
+  right: 20px;
   display: flex;
   flex-direction: column;
   padding: 9px 14px 11px;
@@ -3051,7 +3049,7 @@ small {
   position: absolute;
   z-index: 4;
   left: 24px;
-  right: 38px;
+  right: 24px;
   bottom: 24px;
   padding: 0;
 }
@@ -3145,11 +3143,13 @@ small {
 .movie-page .rating-brand { color: #edeae2; font-size: 11px; }
 .movie-page .rating-label { color: var(--muted); font-size: 9px; }
 .movie-page .synopsis {
-  max-width: none;
-  margin: 18px 2px 0;
-  color: #c5c2bb;
-  font-size: 15px;
-  line-height: 1.65;
+  max-width: 650px;
+  margin: 22px auto 0;
+  color: #d2cec5;
+  font: 400 17px/1.58 "Brygada 1918", Georgia, serif;
+  letter-spacing: .005em;
+  text-align: center;
+  text-wrap: pretty;
 }
 .film-tabs {
   position: sticky;
@@ -3259,11 +3259,10 @@ small {
     height: min(650px, 78svh);
     min-height: 590px;
   }
-  .movie-page .film-cover::after { background: linear-gradient(90deg, transparent 0 97%, var(--accent) 97% 100%); }
-  .hero-toolbar { left: 16px; right: 26px; }
-  .box-office-sticker { top: 36%; right: 28px; }
+  .hero-toolbar { left: 16px; right: 16px; }
+  .box-office-sticker { top: 36%; right: 18px; }
   .box-office-sticker strong { font-size: 29px; }
-  .movie-page .film-cover .movie-copy { left: 20px; right: 30px; bottom: 22px; }
+  .movie-page .film-cover .movie-copy { left: 20px; right: 20px; bottom: 22px; }
   .movie-page .movie-copy h1 { font-size: clamp(41px, 13.2vw, 55px); }
   .movie-page .movie-meta { flex-direction: row; align-items: center; gap: 0; }
   .movie-page .movie-meta > span:not(:last-child)::after { margin-inline: 7px; }
@@ -3274,7 +3273,7 @@ small {
   }
   .movie-page .rating-item { min-height: 90px; padding: 11px 12px; }
   .movie-page .rating-item:first-child { padding-left: 12px; }
-  .movie-page .synopsis { margin-inline: 18px; }
+  .movie-page .synopsis { margin-inline: 22px; }
   .film-tabs { margin: 18px 16px 0; }
   .movie-page .movie-content { padding-inline: 20px; }
   .movie-page .section-title h2,

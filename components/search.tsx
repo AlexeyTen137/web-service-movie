@@ -88,7 +88,7 @@ export function Search({ compact = false }: { compact?: boolean }) {
           aria-activedescendant={index >= 0 ? `result-${index}` : undefined}
           placeholder={
             compact
-              ? "Найти фильм"
+              ? "> НАЙТИ ФИЛЬМ_"
               : "Название фильма или оригинальное название…"
           }
           onKeyDown={(e) => {
